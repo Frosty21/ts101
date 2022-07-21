@@ -71,7 +71,5 @@
   "exclude": [
     "node_modules"
   ], 
-  // "files": [
-  //   "app.js"
-  // ]
+  // "files": []
 }
