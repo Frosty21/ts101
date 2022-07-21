@@ -1,6 +1,6 @@
-class department {
+abstract class department {
   static fiscalYear = 2020;
-  constructor(private readonly id: string, public name: string) {
+  constructor(protected readonly id: string, public name: string) {
     // this.name = n;
     console.log(department.fiscalYear);
   }
@@ -11,9 +11,7 @@ class department {
     return { name: name };
   }
 
-  describe(this: department) {
-    console.log("Department: " + this.name);
-  }
+  abstract describe(this: department): void;
 
   addEmployee(employee: string) {
     this.employees.push(employee);
@@ -44,6 +42,9 @@ class AccountingDepartment extends department {
     }
     this.addReport(value);
   }
+  describe() {
+    console.log("Acc Dep - ID: " + this.id);
+  }
 
   addEmployee(name: string) {
     if (name === "nath") {
@@ -65,21 +66,26 @@ class ITDepartment extends department {
     super(id, "IT");
     this.admins = admins;
   }
+  describe() {
+    console.log("IT Dep - ID: " + this.id);
+  }
 }
 
 const employee1 = department.createEmployee("Beep");
 console.log(employee1);
 const accounting = new AccountingDepartment("foo", []);
+accounting.describe();
 
-accounting.addEmployee("nath");
-accounting.addEmployee("Bar");
-accounting.addEmployee("Foo");
-accounting.printEmployeeInfo();
+// accounting.addEmployee("nath");
+// accounting.addEmployee("Bar");
+// accounting.addEmployee("Foo");
+// accounting.printEmployeeInfo();
 
-accounting.mostRecentReport = "YER";
-console.log(accounting.mostRecentReport);
-accounting.addReport("Some report");
-accounting.printReports();
+// accounting.mostRecentReport = "YER";
+// console.log(accounting.mostRecentReport);
+// accounting.addReport("Some report");
+// accounting.printReports();
+
 // // this will careate and error if employees is private making in unaccesable unless within the class
 // accounting.employees[2] = "BAHAH...";
 
